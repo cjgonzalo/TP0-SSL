@@ -1,21 +1,20 @@
 #include "scanner.h"
 
 int get_token(){
-    int caracter = getchar();
-    if(caracter == EOF){
+   char caracter = getchar();
+   if(caracter == EOF){
       return FDT;
-    } else if(caracter == ','){
+   } else if(caracter == ','){
       buffer[0] = caracter;
       return SEP;
-    } else if(!isspace(caracter)){
+   } else if(!isspace(caracter)){
       int i;
-      for(i = 0; caracter != EOF && caracter != ',' && !isspace(caracter); i++){
-        buffer[i] = caracter;
-        caracter = getchar();
+      for(i = 0; caracter != EOF && caracter != ',' && isspace(caracter); i++){
+         buffer[i] = caracter;
+         caracter = getchar();
       }
       ungetc(caracter, stdin);
       buffer[i] = '\0';
       return CAD;
-    }
-
+   }
 }
